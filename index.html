@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications & Recherches</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: #667eea;
+            color: white;
+        }
+
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 300px);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .authors {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .abstract {
+            margin-top: 0.5rem;
+            color: #555;
+        }
+
+        .research-interests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .interest-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .interest-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Admin Styles */
+        .admin-login {
+            max-width: 400px;
+            margin: 3rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .admin-login h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .admin-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .admin-panel h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-item {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .admin-item h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Site Public -->
+    <div id="publicSite">
+        <header>
+            <div class="container">
+                <h1 id="siteTitle">Anicet Lepetit Ondo : Mes Publications & Recherches</h1>
+                <p id="siteSubtitle">Conférences, Articles et Centres d'Intérêt</p>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="accueil">Accueil</a></li>
+                <li><a href="#" class="nav-link" data-section="publications">Publications</a></li>
+                <li><a href="#" class="nav-link" data-section="interets">Intérêts de Recherche</a></li>
+                <li><a href="#" class="nav-link" data-section="contact">Contact</a></li>
+                <li><a href="#" class="nav-link" data-section="admin">Admin</a></li>
+            </ul>
+        </nav>
+
+        <main class="container">
+            <section id="accueil" class="section active">
+                <div class="card">
+                    <h2>Bienvenue</h2>
+                    <p>Ce site présente mes travaux de recherche, publications académiques et centres d'intérêt scientifiques.</p>
+                </div>
+            </section>
+
+            <section id="publications" class="section">
+                <h2 style="margin-bottom: 1.5rem;">Publications</h2>
+                <div id="publicationsList"></div>
+            </section>
+
+            <section id="interets" class="section">
+                <h2 style="margin-bottom: 1.5rem;">Intérêts de Recherche</h2>
+                <div id="interetsList" class="research-interests"></div>
+            </section>
+
+            <section id="contact" class="section">
+                <h2 style="margin-bottom: 1.5rem;">Contact</h2>
+                <div class="card">
+                    <h3>Coordonnées</h3>
+                    <div style="line-height: 2;">
+                        <p><strong>Email professionnel :</strong> <span id="emailPro"></span></p>
+                        <p><strong>Email personnel :</strong> <span id="emailPerso"></span></p>
+                        <p><strong>Téléphone :</strong> <span id="telephone"></span></p>
+                        <p><strong>Bureau :</strong> <span id="bureau"></span></p>
+                        <p><strong>Adresse :</strong> <span id="adresse"></span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="admin" class="section">
+                <div id="loginForm" class="admin-login">
+                    <h2>Connexion Admin</h2>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="adminPassword">
+                    </div>
+                    <button class="btn" onclick="login()">Se connecter</button>
+                    <p id="loginError" style="color: red; margin-top: 1rem; display: none;">Mot de passe incorrect</p>
+                </div>
+
+                <div id="adminPanel" class="hidden">
+                    <button class="btn btn-danger logout-btn" onclick="logout()">Déconnexion</button>
+
+                    <!-- Gestion des Publications -->
+                    <div class="admin-panel">
+                        <h2>Gérer les Publications</h2>
+                        <div class="form-group">
+                            <label>Titre</label>
+                            <input type="text" id="pubTitle">
+                        </div>
+                        <div class="form-group">
+                            <label>Auteurs</label>
+                            <input type="text" id="pubAuthors" placeholder="Ex: Dupont J., Martin P.">
+                        </div>
+                        <div class="form-group">
+                            <label>Année</label>
+                            <input type="number" id="pubYear" min="1900" max="2100">
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select id="pubType">
+                                <option value="Conférence">Conférence</option>
+                                <option value="Article">Article</option>
+                                <option value="Journal">Journal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Lieu/Journal</label>
+                            <input type="text" id="pubVenue">
+                        </div>
+                        <div class="form-group">
+                            <label>Résumé</label>
+                            <textarea id="pubAbstract"></textarea>
+                        </div>
+                        <button class="btn" onclick="addPublication()">Ajouter Publication</button>
+
+                        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Publications Existantes</h3>
+                        <div id="adminPublicationsList"></div>
+                    </div>
+
+                    <!-- Gestion des Intérêts -->
+                    <div class="admin-panel">
+                        <h2>Gérer les Intérêts de Recherche</h2>
+                        <div class="form-group">
+                            <label>Titre</label>
+                            <input type="text" id="interestTitle">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="interestDesc"></textarea>
+                        </div>
+                        <button class="btn" onclick="addInterest()">Ajouter Intérêt</button>
+
+                        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Intérêts Existants</h3>
+                        <div id="adminInterestsList"></div>
+                    </div>
+
+                    <!-- Modifier Mot de Passe -->
+                    <div class="admin-panel">
+                        <h2>Changer le Mot de Passe</h2>
+                        <div class="form-group">
+                            <label>Nouveau mot de passe</label>
+                            <input type="password" id="newPassword">
+                        </div>
+                        <button class="btn" onclick="changePassword()">Modifier</button>
+                    </div>
+
+                    <!-- Gérer les Informations de Contact -->
+                    <div class="admin-panel">
+                        <h2>Gérer les Informations de Contact</h2>
+                        <div class="form-group">
+                            <label>Email professionnel</label>
+                            <input type="email" id="contactEmailPro">
+                        </div>
+                        <div class="form-group">
+                            <label>Email personnel</label>
+                            <input type="email" id="contactEmailPerso">
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="tel" id="contactTelephone">
+                        </div>
+                        <div class="form-group">
+                            <label>Bureau</label>
+                            <input type="text" id="contactBureau">
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse</label>
+                            <textarea id="contactAdresse" rows="2"></textarea>
+                        </div>
+                        <button class="btn" onclick="updateContact()">Mettre à jour</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 - Tous droits réservés</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Données stockées en mémoire (simulation du localStorage)
+        let data = {
+            password: 'Cantor@1992',
+            contact: {
+                emailPro: 'votre.nom@universite.fr',
+                emailPerso: 'votre.email@gmail.com',
+                telephone: '+33 1 23 45 67 89',
+                bureau: 'Bureau 123, Bâtiment A',
+                adresse: 'Université XYZ, 123 Rue de la Recherche, 75000 Paris'
+            },
+            publications: [
+                {
+                    id: 1,
+                    title: 'Exemple: Intelligence Artificielle et Apprentissage Profond',
+                    authors: 'Dupont J., Martin P.',
+                    year: 2024,
+                    type: 'Conférence',
+                    venue: 'ICML 2024',
+                    abstract: 'Cette publication explore les nouvelles méthodes d\'apprentissage profond...'
+                }
+            ],
+            interests: [
+                {
+                    id: 1,
+                    title: 'Machine Learning',
+                    description: 'Développement d\'algorithmes d\'apprentissage automatique'
+                },
+                {
+                    id: 2,
+                    title: 'Traitement du Langage Naturel',
+                    description: 'Analyse et génération de texte par IA'
+                }
+            ]
+        };
+
+        let isLoggedIn = false;
+
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = e.target.dataset.section;
+                
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(section).classList.add('active');
+            });
+        });
+
+        // Affichage des publications
+        function displayPublications() {
+            const list = document.getElementById('publicationsList');
+            list.innerHTML = data.publications.map(pub => `
+                <div class="card">
+                    <h3>${pub.title}</h3>
+                    <div class="authors">${pub.authors}</div>
+                    <div class="meta">${pub.type} - ${pub.venue} (${pub.year})</div>
+                    <div class="abstract">${pub.abstract}</div>
+                </div>
+            `).join('');
+        }
+
+        // Affichage des intérêts
+        function displayInterests() {
+            const list = document.getElementById('interetsList');
+            list.innerHTML = data.interests.map(interest => `
+                <div class="interest-card">
+                    <h3>${interest.title}</h3>
+                    <p>${interest.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Affichage des informations de contact
+        function displayContact() {
+            document.getElementById('emailPro').textContent = data.contact.emailPro;
+            document.getElementById('emailPerso').textContent = data.contact.emailPerso;
+            document.getElementById('telephone').textContent = data.contact.telephone;
+            document.getElementById('bureau').textContent = data.contact.bureau;
+            document.getElementById('adresse').textContent = data.contact.adresse;
+        }
+
+        // Affichage admin publications
+        function displayAdminPublications() {
+            const list = document.getElementById('adminPublicationsList');
+            list.innerHTML = data.publications.map(pub => `
+                <div class="admin-item">
+                    <h4>${pub.title}</h4>
+                    <p>${pub.authors} - ${pub.year}</p>
+                    <button class="btn btn-danger btn-small" onclick="deletePublication(${pub.id})">Supprimer</button>
+                </div>
+            `).join('');
+        }
+
+        // Affichage admin intérêts
+        function displayAdminInterests() {
+            const list = document.getElementById('adminInterestsList');
+            list.innerHTML = data.interests.map(interest => `
+                <div class="admin-item">
+                    <h4>${interest.title}</h4>
+                    <p>${interest.description}</p>
+                    <button class="btn btn-danger btn-small" onclick="deleteInterest(${interest.id})">Supprimer</button>
+                </div>
+            `).join('');
+        }
+
+        // Login
+        function login() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === data.password) {
+                isLoggedIn = true;
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('loginError').style.display = 'none';
+                displayAdminPublications();
+                displayAdminInterests();
+                loadContactForm();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        // Logout
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Ajouter publication
+        function addPublication() {
+            const pub = {
+                id: Date.now(),
+                title: document.getElementById('pubTitle').value,
+                authors: document.getElementById('pubAuthors').value,
+                year: parseInt(document.getElementById('pubYear').value),
+                type: document.getElementById('pubType').value,
+                venue: document.getElementById('pubVenue').value,
+                abstract: document.getElementById('pubAbstract').value
+            };
+
+            if (pub.title && pub.authors && pub.year) {
+                data.publications.push(pub);
+                displayPublications();
+                displayAdminPublications();
+                
+                // Clear form
+                document.getElementById('pubTitle').value = '';
+                document.getElementById('pubAuthors').value = '';
+                document.getElementById('pubYear').value = '';
+                document.getElementById('pubVenue').value = '';
+                document.getElementById('pubAbstract').value = '';
+                
+                alert('Publication ajoutée avec succès!');
+            } else {
+                alert('Veuillez remplir tous les champs obligatoires');
+            }
+        }
+
+        // Supprimer publication
+        function deletePublication(id) {
+            if (confirm('Voulez-vous vraiment supprimer cette publication?')) {
+                data.publications = data.publications.filter(p => p.id !== id);
+                displayPublications();
+                displayAdminPublications();
+            }
+        }
+
+        // Ajouter intérêt
+        function addInterest() {
+            const interest = {
+                id: Date.now(),
+                title: document.getElementById('interestTitle').value,
+                description: document.getElementById('interestDesc').value
+            };
+
+            if (interest.title && interest.description) {
+                data.interests.push(interest);
+                displayInterests();
+                displayAdminInterests();
+                
+                document.getElementById('interestTitle').value = '';
+                document.getElementById('interestDesc').value = '';
+                
+                alert('Intérêt ajouté avec succès!');
+            } else {
+                alert('Veuillez remplir tous les champs');
+            }
+        }
+
+        // Supprimer intérêt
+        function deleteInterest(id) {
+            if (confirm('Voulez-vous vraiment supprimer cet intérêt?')) {
+                data.interests = data.interests.filter(i => i.id !== id);
+                displayInterests();
+                displayAdminInterests();
+            }
+        }
+
+        // Changer mot de passe
+        function changePassword() {
+            const newPass = document.getElementById('newPassword').value;
+            if (newPass && newPass.length >= 6) {
+                data.password = newPass;
+                document.getElementById('newPassword').value = '';
+                alert('Mot de passe modifié avec succès!');
+            } else {
+                alert('Le mot de passe doit contenir au moins 6 caractères');
+            }
+        }
+
+        // Charger les infos de contact dans le formulaire admin
+        function loadContactForm() {
+            document.getElementById('contactEmailPro').value = data.contact.emailPro;
+            document.getElementById('contactEmailPerso').value = data.contact.emailPerso;
+            document.getElementById('contactTelephone').value = data.contact.telephone;
+            document.getElementById('contactBureau').value = data.contact.bureau;
+            document.getElementById('contactAdresse').value = data.contact.adresse;
+        }
+
+        // Mettre à jour les informations de contact
+        function updateContact() {
+            data.contact.emailPro = document.getElementById('contactEmailPro').value;
+            data.contact.emailPerso = document.getElementById('contactEmailPerso').value;
+            data.contact.telephone = document.getElementById('contactTelephone').value;
+            data.contact.bureau = document.getElementById('contactBureau').value;
+            data.contact.adresse = document.getElementById('contactAdresse').value;
+            
+            displayContact();
+            alert('Informations de contact mises à jour avec succès!');
+        }
+
+        // Initialisation
+        displayPublications();
+        displayInterests();
+        displayContact();
+    </script>
+</body>
+</html>
