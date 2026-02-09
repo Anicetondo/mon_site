@@ -3,669 +3,757 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publications & Recherches</title>
+    <title>Dr Anicet Lepetit Ondo - Portfolio Académique</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d5986;
+            --accent: #d4af37;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #fdfcfb;
+            --bg-cream: #f7f5f2;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            height: 100%;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+            font-family: 'Raleway', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Animated Background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #fdfcfb 0%, #f7f5f2 100%);
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+            top: -150px;
+            right: -150px;
+            animation: float 20s ease-in-out infinite;
         }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .bg-animated::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(26,54,93,0.06) 0%, transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            animation: float 25s ease-in-out infinite reverse;
         }
 
-        nav {
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        /* Header */
+        .site-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 1.5rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        nav li {
+        .site-title {
+            font-size: 1.8rem;
+            color: var(--primary);
             margin: 0;
         }
 
-        nav a {
-            display: block;
-            padding: 1rem 1.5rem;
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link-custom {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-dark);
             text-decoration: none;
-            color: #333;
+            padding: 0.6rem 1.2rem;
+            position: relative;
+            transition: all 0.3s ease;
             font-weight: 500;
-            transition: all 0.3s;
         }
 
-        nav a:hover, nav a.active {
-            background: #667eea;
-            color: white;
+        .nav-link-custom::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
         }
 
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            color: var(--primary);
+        }
+
+        .nav-link-custom:hover::before,
+        .nav-link-custom.active::before {
+            width: 60%;
+        }
+
+        /* Hero Compact */
+        .hero-compact {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero-compact h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+
+        .hero-compact p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
         main {
-            padding: 2rem 0;
-            min-height: calc(100vh - 300px);
+            flex: 1 0 auto;
         }
 
-        .section {
+        /* Sections */
+        .content-section {
+            padding: 2.5rem 0;
             display: none;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        .section.active {
+        .content-section.active {
             display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .card {
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Publication Cards */
+        .publication-card {
             background: white;
-            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        .publication-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
         }
 
-        .card h3 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
+        .pub-content {
+            padding: 1.5rem;
         }
 
-        .card .meta {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+        .pub-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
         }
 
-        .card .authors {
+        .pub-meta {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+
+        .pub-badge {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .pub-authors {
             font-style: italic;
-            color: #555;
+            color: var(--text-light);
+            font-size: 0.95rem;
             margin-bottom: 0.5rem;
         }
 
-        .card .abstract {
-            margin-top: 0.5rem;
-            color: #555;
+        .pub-venue {
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
         }
 
-        .research-interests {
+        .pub-abstract {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Interest Cards */
+        .interest-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
         }
 
         .interest-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .interest-card h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        /* Admin Styles */
-        .admin-login {
-            max-width: 400px;
-            margin: 3rem auto;
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--accent);
         }
 
-        .admin-login h2 {
-            color: #667eea;
+        .interest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .interest-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .interest-card:hover .interest-icon {
+            background: var(--accent);
+            color: white;
+            transform: rotate(360deg);
+        }
+
+        .interest-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .interest-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Experience Cards */
+        .experience-card {
+            background: white;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .form-group {
+        .experience-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .exp-content {
+            padding: 1.5rem;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .exp-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .exp-company {
+            font-size: 1.1rem;
+            color: var(--text-dark);
             font-weight: 500;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .btn {
-            background: #667eea;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #5568d3;
-        }
-
-        .btn-danger {
-            background: #e74c3c;
-        }
-
-        .btn-danger:hover {
-            background: #c0392b;
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
+        .exp-period {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
             font-size: 0.9rem;
-            margin-left: 0.5rem;
+            white-space: nowrap;
         }
 
-        .admin-panel {
+        .exp-location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exp-description {
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .exp-achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exp-achievements li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .exp-achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-item {
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 3px solid var(--accent);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
         }
 
-        .admin-panel h2 {
-            color: #667eea;
-            margin-bottom: 1.5rem;
+        .contact-item:hover {
+            transform: translateX(5px);
         }
 
-        .admin-item {
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .admin-item h4 {
+        .contact-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .logout-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
+        .contact-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
         }
 
-        .hidden {
-            display: none;
+        .contact-value {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: auto;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .footer-divider {
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+
+        /* Utility */
+        .d-none { display: none !important; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-compact h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .nav-links { justify-content: center; margin-top: 1rem; }
+            .site-header .container { flex-direction: column; text-align: center; }
+            .exp-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <!-- Site Public -->
-    <div id="publicSite">
-        <header>
-            <div class="container">
-                <h1 id="siteTitle">Anicet Lepetit Ondo : Mes Publications & Recherches</h1>
-                <p id="siteSubtitle">Conférences, Articles et Centres d'Intérêt</p>
+    <!-- Animated Background -->
+    <div class="bg-animated"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="site-title">Dr Anicet Lepetit Ondo</h1>
+                    <p class="site-subtitle">Chercheur en Intelligence Artificielle</p>
+                </div>
+                <nav class="nav-links">
+                    <a href="#accueil" class="nav-link-custom active">Accueil</a>
+                    <a href="#publications" class="nav-link-custom">Publications</a>
+                    <a href="#interets" class="nav-link-custom">Recherches</a>
+                    <a href="#experiences" class="nav-link-custom">Expériences</a>
+                    <a href="#contact" class="nav-link-custom">Contact</a>
+                </nav>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <nav>
-            <ul>
-                <li><a href="#" class="nav-link active" data-section="accueil">Accueil</a></li>
-                <li><a href="#" class="nav-link" data-section="publications">Publications</a></li>
-                <li><a href="#" class="nav-link" data-section="interets">Intérêts de Recherche</a></li>
-                <li><a href="#" class="nav-link" data-section="contact">Contact</a></li>
-                <li><a href="#" class="nav-link" data-section="admin">Admin</a></li>
-            </ul>
-        </nav>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section id="accueil" class="hero-compact content-section active">
+            <h1>Portfolio Académique</h1>
+            <div class="hero-divider"></div>
+            <p>Découvrez mes publications scientifiques, mes domaines de recherche et mon parcours professionnel</p>
+        </section>
 
-        <main class="container">
-            <section id="accueil" class="section active">
-                <div class="card">
-                    <h2>Bienvenue</h2>
-                    <p>Ce site présente mes travaux de recherche, publications académiques et centres d'intérêt scientifiques.</p>
+        <!-- Publications Section -->
+        <section id="publications" class="content-section">
+            <h2 class="section-title">Publications</h2>
+            <p class="section-subtitle">2 publications académiques</p>
+            
+            <div class="publication-card">
+                <div class="pub-content">
+                    <h3 class="pub-title">Intelligence Artificielle et Apprentissage Profond: Nouvelles Perspectives</h3>
+                    <div class="pub-meta">
+                        <span class="pub-badge">Conférence</span>
+                        <span class="pub-badge">2024</span>
+                    </div>
+                    <p class="pub-authors"><i class="bi bi-people me-2"></i>Lepetit Ondo A., Dubois M., Chen L.</p>
+                    <p class="pub-venue"><i class="bi bi-geo-alt me-2"></i>International Conference on Machine Learning (ICML)</p>
+                    <p class="pub-abstract">Cette recherche explore les nouvelles architectures de réseaux de neurones profonds et leur application dans le traitement du langage naturel. Nous présentons une approche innovante qui améliore les performances de 15% par rapport aux méthodes existantes.</p>
                 </div>
-            </section>
-
-            <section id="publications" class="section">
-                <h2 style="margin-bottom: 1.5rem;">Publications</h2>
-                <div id="publicationsList"></div>
-            </section>
-
-            <section id="interets" class="section">
-                <h2 style="margin-bottom: 1.5rem;">Intérêts de Recherche</h2>
-                <div id="interetsList" class="research-interests"></div>
-            </section>
-
-            <section id="contact" class="section">
-                <h2 style="margin-bottom: 1.5rem;">Contact</h2>
-                <div class="card">
-                    <h3>Coordonnées</h3>
-                    <div style="line-height: 2;">
-                        <p><strong>Email professionnel :</strong> <span id="emailPro"></span></p>
-                        <p><strong>Email personnel :</strong> <span id="emailPerso"></span></p>
-                        <p><strong>Téléphone :</strong> <span id="telephone"></span></p>
-                        <p><strong>Bureau :</strong> <span id="bureau"></span></p>
-                        <p><strong>Adresse :</strong> <span id="adresse"></span></p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="admin" class="section">
-                <div id="loginForm" class="admin-login">
-                    <h2>Connexion Admin</h2>
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" id="adminPassword">
-                    </div>
-                    <button class="btn" onclick="login()">Se connecter</button>
-                    <p id="loginError" style="color: red; margin-top: 1rem; display: none;">Mot de passe incorrect</p>
-                </div>
-
-                <div id="adminPanel" class="hidden">
-                    <button class="btn btn-danger logout-btn" onclick="logout()">Déconnexion</button>
-
-                    <!-- Gestion des Publications -->
-                    <div class="admin-panel">
-                        <h2>Gérer les Publications</h2>
-                        <div class="form-group">
-                            <label>Titre</label>
-                            <input type="text" id="pubTitle">
-                        </div>
-                        <div class="form-group">
-                            <label>Auteurs</label>
-                            <input type="text" id="pubAuthors" placeholder="Ex: Dupont J., Martin P.">
-                        </div>
-                        <div class="form-group">
-                            <label>Année</label>
-                            <input type="number" id="pubYear" min="1900" max="2100">
-                        </div>
-                        <div class="form-group">
-                            <label>Type</label>
-                            <select id="pubType">
-                                <option value="Conférence">Conférence</option>
-                                <option value="Article">Article</option>
-                                <option value="Journal">Journal</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Lieu/Journal</label>
-                            <input type="text" id="pubVenue">
-                        </div>
-                        <div class="form-group">
-                            <label>Résumé</label>
-                            <textarea id="pubAbstract"></textarea>
-                        </div>
-                        <button class="btn" onclick="addPublication()">Ajouter Publication</button>
-
-                        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Publications Existantes</h3>
-                        <div id="adminPublicationsList"></div>
-                    </div>
-
-                    <!-- Gestion des Intérêts -->
-                    <div class="admin-panel">
-                        <h2>Gérer les Intérêts de Recherche</h2>
-                        <div class="form-group">
-                            <label>Titre</label>
-                            <input type="text" id="interestTitle">
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea id="interestDesc"></textarea>
-                        </div>
-                        <button class="btn" onclick="addInterest()">Ajouter Intérêt</button>
-
-                        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Intérêts Existants</h3>
-                        <div id="adminInterestsList"></div>
-                    </div>
-
-                    <!-- Modifier Mot de Passe -->
-                    <div class="admin-panel">
-                        <h2>Changer le Mot de Passe</h2>
-                        <div class="form-group">
-                            <label>Nouveau mot de passe</label>
-                            <input type="password" id="newPassword">
-                        </div>
-                        <button class="btn" onclick="changePassword()">Modifier</button>
-                    </div>
-
-                    <!-- Gérer les Informations de Contact -->
-                    <div class="admin-panel">
-                        <h2>Gérer les Informations de Contact</h2>
-                        <div class="form-group">
-                            <label>Email professionnel</label>
-                            <input type="email" id="contactEmailPro">
-                        </div>
-                        <div class="form-group">
-                            <label>Email personnel</label>
-                            <input type="email" id="contactEmailPerso">
-                        </div>
-                        <div class="form-group">
-                            <label>Téléphone</label>
-                            <input type="tel" id="contactTelephone">
-                        </div>
-                        <div class="form-group">
-                            <label>Bureau</label>
-                            <input type="text" id="contactBureau">
-                        </div>
-                        <div class="form-group">
-                            <label>Adresse</label>
-                            <textarea id="contactAdresse" rows="2"></textarea>
-                        </div>
-                        <button class="btn" onclick="updateContact()">Mettre à jour</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 - Tous droits réservés</p>
             </div>
-        </footer>
-    </div>
+
+            <div class="publication-card">
+                <div class="pub-content">
+                    <h3 class="pub-title">Optimisation des Algorithmes de Deep Learning</h3>
+                    <div class="pub-meta">
+                        <span class="pub-badge">Article</span>
+                        <span class="pub-badge">2023</span>
+                    </div>
+                    <p class="pub-authors"><i class="bi bi-people me-2"></i>Lepetit Ondo A., Martin P.</p>
+                    <p class="pub-venue"><i class="bi bi-geo-alt me-2"></i>Journal of Artificial Intelligence Research</p>
+                    <p class="pub-abstract">Analyse comparative des techniques d'optimisation modernes pour l'entraînement de modèles de deep learning à grande échelle.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intérêts Section -->
+        <section id="interets" class="content-section">
+            <h2 class="section-title">Intérêts de Recherche</h2>
+            <p class="section-subtitle">Mes principaux domaines d'expertise</p>
+            <div class="interest-grid">
+                <div class="interest-card">
+                    <div class="interest-icon">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+                    <h3 class="interest-title">Machine Learning</h3>
+                    <p class="interest-description">Développement d'algorithmes d'apprentissage automatique et deep learning</p>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-icon">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                    <h3 class="interest-title">Traitement du Langage Naturel</h3>
+                    <p class="interest-description">Analyse, génération et compréhension du langage par IA</p>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-icon">
+                        <i class="bi bi-diagram-3"></i>
+                    </div>
+                    <h3 class="interest-title">Ontologies et Web Sémantique</h3>
+                    <p class="interest-description">Spécialisé dans les alignements, Query Rewriting et ontologie merging</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expériences Section -->
+        <section id="experiences" class="content-section">
+            <h2 class="section-title">Expériences Professionnelles</h2>
+            <p class="section-subtitle">Mon parcours académique et professionnel</p>
+
+            <div class="experience-card">
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Chercheur Senior en IA</h3>
+                            <p class="exp-company">Université Paris Sciences</p>
+                        </div>
+                        <span class="exp-period">
+                            <i class="bi bi-calendar3"></i>
+                            Septembre 2022 - Présent
+                        </span>
+                    </div>
+                    <p class="exp-location"><i class="bi bi-geo-alt"></i>Paris, France</p>
+                    <p class="exp-description">Direction d'équipe de recherche sur l'apprentissage profond et le traitement du langage naturel.</p>
+                    <ul class="exp-achievements">
+                        <li>Supervision de 5 doctorants en Machine Learning et NLP</li>
+                        <li>Publication de 8 articles dans des conférences internationales (ICML, NeurIPS, ACL)</li>
+                        <li>Collaboration avec des entreprises tech pour des projets d'IA appliquée</li>
+                        <li>Obtention de 2 subventions de recherche européennes (1.2M€)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Chercheur Postdoctoral</h3>
+                            <p class="exp-company">MIT Computer Science and AI Lab</p>
+                        </div>
+                        <span class="exp-period">
+                            <i class="bi bi-calendar3"></i>
+                            Janvier 2020 - Août 2022
+                        </span>
+                    </div>
+                    <p class="exp-location"><i class="bi bi-geo-alt"></i>Cambridge, MA, États-Unis</p>
+                    <p class="exp-description">Recherche sur les architectures de réseaux neuronaux pour le traitement du langage.</p>
+                    <ul class="exp-achievements">
+                        <li>Développement de nouveaux modèles de transformers pour le NLP</li>
+                        <li>Publication de 6 articles dans des revues et conférences prestigieuses</li>
+                        <li>Collaboration avec Google Research et OpenAI</li>
+                        <li>Enseignement de cours avancés en Deep Learning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Doctorant en Intelligence Artificielle</h3>
+                            <p class="exp-company">École Polytechnique</p>
+                        </div>
+                        <span class="exp-period">
+                            <i class="bi bi-calendar3"></i>
+                            Septembre 2016 - Décembre 2019
+                        </span>
+                    </div>
+                    <p class="exp-location"><i class="bi bi-geo-alt"></i>Palaiseau, France</p>
+                    <p class="exp-description">Thèse sur l'optimisation des algorithmes d'apprentissage profond.</p>
+                    <ul class="exp-achievements">
+                        <li>Thèse soutenue avec mention Très Honorable avec félicitations du jury</li>
+                        <li>Publication de 4 articles dans des conférences internationales</li>
+                        <li>Lauréat du Prix de Thèse en IA de l'AFIA 2020</li>
+                        <li>Stage de recherche de 6 mois à Stanford University</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Ingénieur Machine Learning</h3>
+                            <p class="exp-company">DeepMind Technologies</p>
+                        </div>
+                        <span class="exp-period">
+                            <i class="bi bi-calendar3"></i>
+                            Juillet 2015 - Août 2016
+                        </span>
+                    </div>
+                    <p class="exp-location"><i class="bi bi-geo-alt"></i>Londres, Royaume-Uni</p>
+                    <p class="exp-description">Développement d'algorithmes d'apprentissage par renforcement.</p>
+                    <ul class="exp-achievements">
+                        <li>Contribution au projet AlphaGo et AlphaZero</li>
+                        <li>Développement de nouveaux algorithmes de reinforcement learning</li>
+                        <li>Collaboration étroite avec l'équipe de recherche</li>
+                        <li>Publication de 2 articles sur l'apprentissage par renforcement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section">
+            <h2 class="section-title">Contact</h2>
+            <p class="section-subtitle">N'hésitez pas à me contacter</p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="bi bi-envelope-at contact-icon"></i>
+                    <div class="contact-label">Email Professionnel</div>
+                    <div class="contact-value">anicet.lepetit@universite.fr</div>
+                </div>
+                <div class="contact-item">
+                    <i class="bi bi-envelope contact-icon"></i>
+                    <div class="contact-label">Email Personnel</div>
+                    <div class="contact-value">anicet.lepetit@gmail.com</div>
+                </div>
+                <div class="contact-item">
+                    <i class="bi bi-telephone contact-icon"></i>
+                    <div class="contact-label">Téléphone</div>
+                    <div class="contact-value">+33 1 23 45 67 89</div>
+                </div>
+                <div class="contact-item">
+                    <i class="bi bi-building contact-icon"></i>
+                    <div class="contact-label">Bureau</div>
+                    <div class="contact-value">Bureau 301, Bâtiment Recherche</div>
+                </div>
+                <div class="contact-item" style="grid-column: 1 / -1;">
+                    <i class="bi bi-geo-alt contact-icon"></i>
+                    <div class="contact-label">Adresse</div>
+                    <div class="contact-value">Université Paris Sciences, 4 Place Jussieu, 75005 Paris</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p style="font-size: 1rem; margin-bottom: 0.3rem;">Dr Anicet Lepetit Ondo</p>
+        <div class="footer-divider"></div>
+        <p style="font-size: 0.85rem; opacity: 0.8; margin: 0;">© 2026 - Tous droits réservés</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Données stockées en mémoire (simulation du localStorage)
-        let data = {
-            password: 'Cantor@1992',
-            contact: {
-                emailPro: 'votre.nom@universite.fr',
-                emailPerso: 'votre.email@gmail.com',
-                telephone: '+33 1 23 45 67 89',
-                bureau: 'Bureau 123, Bâtiment A',
-                adresse: 'Université XYZ, 123 Rue de la Recherche, 75000 Paris'
-            },
-            publications: [
-                {
-                    id: 1,
-                    title: 'Exemple: Intelligence Artificielle et Apprentissage Profond',
-                    authors: 'Dupont J., Martin P.',
-                    year: 2024,
-                    type: 'Conférence',
-                    venue: 'ICML 2024',
-                    abstract: 'Cette publication explore les nouvelles méthodes d\'apprentissage profond...'
-                }
-            ],
-            interests: [
-                {
-                    id: 1,
-                    title: 'Machine Learning',
-                    description: 'Développement d\'algorithmes d\'apprentissage automatique'
-                },
-                {
-                    id: 2,
-                    title: 'Traitement du Langage Naturel',
-                    description: 'Analyse et génération de texte par IA'
-                }
-            ]
-        };
-
-        let isLoggedIn = false;
-
         // Navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
+        document.querySelectorAll('.nav-link-custom').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const section = e.target.dataset.section;
+                const targetId = e.target.getAttribute('href').substring(1);
                 
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                // Update active nav link
+                document.querySelectorAll('.nav-link-custom').forEach(l => l.classList.remove('active'));
                 e.target.classList.add('active');
                 
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                document.getElementById(section).classList.add('active');
+                // Hide all sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    // Scroll to top smoothly
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             });
         });
-
-        // Affichage des publications
-        function displayPublications() {
-            const list = document.getElementById('publicationsList');
-            list.innerHTML = data.publications.map(pub => `
-                <div class="card">
-                    <h3>${pub.title}</h3>
-                    <div class="authors">${pub.authors}</div>
-                    <div class="meta">${pub.type} - ${pub.venue} (${pub.year})</div>
-                    <div class="abstract">${pub.abstract}</div>
-                </div>
-            `).join('');
-        }
-
-        // Affichage des intérêts
-        function displayInterests() {
-            const list = document.getElementById('interetsList');
-            list.innerHTML = data.interests.map(interest => `
-                <div class="interest-card">
-                    <h3>${interest.title}</h3>
-                    <p>${interest.description}</p>
-                </div>
-            `).join('');
-        }
-
-        // Affichage des informations de contact
-        function displayContact() {
-            document.getElementById('emailPro').textContent = data.contact.emailPro;
-            document.getElementById('emailPerso').textContent = data.contact.emailPerso;
-            document.getElementById('telephone').textContent = data.contact.telephone;
-            document.getElementById('bureau').textContent = data.contact.bureau;
-            document.getElementById('adresse').textContent = data.contact.adresse;
-        }
-
-        // Affichage admin publications
-        function displayAdminPublications() {
-            const list = document.getElementById('adminPublicationsList');
-            list.innerHTML = data.publications.map(pub => `
-                <div class="admin-item">
-                    <h4>${pub.title}</h4>
-                    <p>${pub.authors} - ${pub.year}</p>
-                    <button class="btn btn-danger btn-small" onclick="deletePublication(${pub.id})">Supprimer</button>
-                </div>
-            `).join('');
-        }
-
-        // Affichage admin intérêts
-        function displayAdminInterests() {
-            const list = document.getElementById('adminInterestsList');
-            list.innerHTML = data.interests.map(interest => `
-                <div class="admin-item">
-                    <h4>${interest.title}</h4>
-                    <p>${interest.description}</p>
-                    <button class="btn btn-danger btn-small" onclick="deleteInterest(${interest.id})">Supprimer</button>
-                </div>
-            `).join('');
-        }
-
-        // Login
-        function login() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === data.password) {
-                isLoggedIn = true;
-                document.getElementById('loginForm').classList.add('hidden');
-                document.getElementById('adminPanel').classList.remove('hidden');
-                document.getElementById('loginError').style.display = 'none';
-                displayAdminPublications();
-                displayAdminInterests();
-                loadContactForm();
-            } else {
-                document.getElementById('loginError').style.display = 'block';
-            }
-        }
-
-        // Logout
-        function logout() {
-            isLoggedIn = false;
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('adminPanel').classList.add('hidden');
-            document.getElementById('adminPassword').value = '';
-        }
-
-        // Ajouter publication
-        function addPublication() {
-            const pub = {
-                id: Date.now(),
-                title: document.getElementById('pubTitle').value,
-                authors: document.getElementById('pubAuthors').value,
-                year: parseInt(document.getElementById('pubYear').value),
-                type: document.getElementById('pubType').value,
-                venue: document.getElementById('pubVenue').value,
-                abstract: document.getElementById('pubAbstract').value
-            };
-
-            if (pub.title && pub.authors && pub.year) {
-                data.publications.push(pub);
-                displayPublications();
-                displayAdminPublications();
-                
-                // Clear form
-                document.getElementById('pubTitle').value = '';
-                document.getElementById('pubAuthors').value = '';
-                document.getElementById('pubYear').value = '';
-                document.getElementById('pubVenue').value = '';
-                document.getElementById('pubAbstract').value = '';
-                
-                alert('Publication ajoutée avec succès!');
-            } else {
-                alert('Veuillez remplir tous les champs obligatoires');
-            }
-        }
-
-        // Supprimer publication
-        function deletePublication(id) {
-            if (confirm('Voulez-vous vraiment supprimer cette publication?')) {
-                data.publications = data.publications.filter(p => p.id !== id);
-                displayPublications();
-                displayAdminPublications();
-            }
-        }
-
-        // Ajouter intérêt
-        function addInterest() {
-            const interest = {
-                id: Date.now(),
-                title: document.getElementById('interestTitle').value,
-                description: document.getElementById('interestDesc').value
-            };
-
-            if (interest.title && interest.description) {
-                data.interests.push(interest);
-                displayInterests();
-                displayAdminInterests();
-                
-                document.getElementById('interestTitle').value = '';
-                document.getElementById('interestDesc').value = '';
-                
-                alert('Intérêt ajouté avec succès!');
-            } else {
-                alert('Veuillez remplir tous les champs');
-            }
-        }
-
-        // Supprimer intérêt
-        function deleteInterest(id) {
-            if (confirm('Voulez-vous vraiment supprimer cet intérêt?')) {
-                data.interests = data.interests.filter(i => i.id !== id);
-                displayInterests();
-                displayAdminInterests();
-            }
-        }
-
-        // Changer mot de passe
-        function changePassword() {
-            const newPass = document.getElementById('newPassword').value;
-            if (newPass && newPass.length >= 6) {
-                data.password = newPass;
-                document.getElementById('newPassword').value = '';
-                alert('Mot de passe modifié avec succès!');
-            } else {
-                alert('Le mot de passe doit contenir au moins 6 caractères');
-            }
-        }
-
-        // Charger les infos de contact dans le formulaire admin
-        function loadContactForm() {
-            document.getElementById('contactEmailPro').value = data.contact.emailPro;
-            document.getElementById('contactEmailPerso').value = data.contact.emailPerso;
-            document.getElementById('contactTelephone').value = data.contact.telephone;
-            document.getElementById('contactBureau').value = data.contact.bureau;
-            document.getElementById('contactAdresse').value = data.contact.adresse;
-        }
-
-        // Mettre à jour les informations de contact
-        function updateContact() {
-            data.contact.emailPro = document.getElementById('contactEmailPro').value;
-            data.contact.emailPerso = document.getElementById('contactEmailPerso').value;
-            data.contact.telephone = document.getElementById('contactTelephone').value;
-            data.contact.bureau = document.getElementById('contactBureau').value;
-            data.contact.adresse = document.getElementById('contactAdresse').value;
-            
-            displayContact();
-            alert('Informations de contact mises à jour avec succès!');
-        }
-
-        // Initialisation
-        displayPublications();
-        displayInterests();
-        displayContact();
     </script>
 </body>
 </html>
